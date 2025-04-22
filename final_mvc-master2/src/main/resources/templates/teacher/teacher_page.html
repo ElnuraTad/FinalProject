@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <title>Teachers</title>
+    <link rel="stylesheet" th:href="@{/course.css}" />
+</head>
+<body>
+
+<div class="container">
+    <div align="center">
+
+        <div class="autoris" sec:authorize="isAuthenticated()">
+            <h1>Welcome to teachers page</h1> <span sec:authentication="name"></span>
+            <i><span sec:authentication="principal.authorities">Role</span></i>
+        </div>
+        <br>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Logout">
+        </form>
+
+        <h1 class="course_title">Teachers</h1>
+        <hr>
+        <h3 class="course_link"><a href="/teacher/new">Create Teacher</a></h3>
+        <br>
+        <br>
+        <table border="1" cellpadding="10">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Course</th>
+                <th sec:authorize="hasAnyAuthority('ADMIN','EDITOR')">Settings</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="teacher: ${teacher}">
+                <td th:text="${teacher.id}">ID</td>
+                <td th:text="${teacher.firstName}"></td>
+                <td th:text="${teacher.lastName}"></td>
+                <td th:text="${teacher.email}"></td>
+                <td th:text="${teacher.course.getCourseName()}"></td>
+                <td sec:authorize="hasAnyAuthority('ADMIN','EDITOR')">
+                    <div class="course_link"><a th:href="@{'teacher/edit/'+${teacher.id}}">Edit</a></div>
+                    <div class="course_link"><a sec:authorize="hasAnyAuthority('ADMIN')" th:href="@{'teacher/delete/'+${teacher.id}}">Delete</a></div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <br>
+        <h3 class="course_link"><a href="/">Companies</a></h3>
+        <h3 class="course_link"><a href="/course/">Courses</a></h3>
+        <h3 class="course_link"><a href="/group/">Groups</a></h3>
+        <a href="/aitemp/recommendation"
+           style="display: block; margin-top: 30px; color: #2c84d2; font-weight: bold; text-decoration: none;">
+            🤖 Ask AI Course Assistant
+        </a>
+    </div>
+</div>
+
+</body>
+</html>

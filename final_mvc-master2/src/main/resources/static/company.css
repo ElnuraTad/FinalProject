@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
+
+body {
+    background-color: lightskyblue;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.autoris span{
+    font-size: 22px;
+    color: white;
+    font-weight: bold;
+}
+
+.autoris h1 {
+    color: white;
+    font-family: 'Bangers', cursive;
+}
+
+table {
+    background-color: #f3ecec;
+    color: dodgerblue;
+    text-transform: capitalize;
+}
+
+table th {
+    color: #000;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.company_title {
+    color: #fff;
+}
+
+.company_link a:hover{
+    color: #fff
+}
+
+.company_link a {
+    color: #9898e0;
+    text-transform: uppercase;
+    text-decoration: none;
+}

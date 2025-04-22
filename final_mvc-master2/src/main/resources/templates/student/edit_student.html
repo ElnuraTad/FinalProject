@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактировать студента</title>
+    <link rel="stylesheet" th:href="@{/course.css}" />
+</head>
+<body>
+
+<div class="container">
+    <div align="center">
+        <h1 class="course_title">Редактировать студента</h1>
+        <br>
+        <form action="#" th:action="@{/student/edit}" th:object="${student1}" th:method="post">
+            <table border="0" cellpadding="10">
+                <tr>
+                    <!--<td>Course Id</td>-->
+                    <td><input type="text" th:field="*{id}" hidden readonly="readonly"></td>
+                </tr>
+                <tr>
+                    <td>Имя</td>
+                    <td><input type="text" th:field="*{firstName}"></td>
+                </tr>
+                <tr>
+                    <td>Фамилия</td>
+                    <td><input type="text" th:field="*{lastName}"></td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td><input type="text" th:field="*{email}"></td>
+                </tr>
+                <tr>
+                    <td>Формат</td>
+                    <td><input type="text" th:field="*{studyFormat}"></td>
+                </tr>
+                <tr>
+                    <td>Группа id</td>
+                    <td><input type="text" th:field="*{group}"></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><button type="submit">Сохранить</button></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

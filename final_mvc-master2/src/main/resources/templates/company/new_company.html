@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Создать компанию</title>
+    <link rel="stylesheet" th:href="@{/company.css}" />
+</head>
+<body>
+
+<div class="container">
+    <div align="center">
+        <h1 class="company_title">Create new Company</h1>
+        <br>
+        <form action="#" th:action="@{company/save}" th:object="${company}" method="post">
+            <table border="0" cellpadding="10">
+                <tr>
+                    <td>Company Name</td>
+                    <td><input type="text" required th:field="*{name}"></td>
+                </tr>
+                <tr>
+                    <td>Location</td>
+                    <td><input type="text" required th:field="*{locatedCountry}"></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><button type="submit">Complete</button></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

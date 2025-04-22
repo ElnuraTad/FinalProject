@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <title>All Students</title>
+    <link rel="stylesheet" th:href="@{/course.css}" />
+</head>
+<body>
+
+<div class="container">
+    <div align="center">
+
+        <div class="autoris" sec:authorize="isAuthenticated()">
+            <h1>Welcome to Student page</h1> <span sec:authentication="name"></span>
+            <i><span sec:authentication="principal.authorities">Role</span></i>
+        </div>
+        <br>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Logout">
+        </form>
+
+        <h1 class="course_title">Students</h1>
+        <hr>
+        <h3 class="course_link"><a href="/student/new">Create new Student</a></h3>
+        <br>
+        <br>
+        <table border="1" cellpadding="10">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last name</th>
+                <th>Email</th>
+                <th>Study Format</th>
+                <th>Group</th>
+                <th sec:authorize="hasAnyAuthority('ADMIN','EDITOR')">Settings</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="student: ${student}">
+                <td th:text="${student.id}">ID</td>
+                <td th:text="${student.firstName}"></td>
+                <td th:text="${student.lastName}"></td>
+                <td th:text="${student.email}"></td>
+                <td th:text="${student.studyFormat}"></td>
+                <td th:text="${student.group.getGroupName()}"></td>
+                <td sec:authorize="hasAnyAuthority('ADMIN','EDITOR')">
+                    <div class="course_link"><a th:href="@{'student/edit/'+${student.id}}">Edit</a></div>
+                    <div class="course_link"><a sec:authorize="hasAnyAuthority('ADMIN')" th:href="@{'student/delete/'+${student.id}}">Delete</a></div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <br>
+        <h3 class="course_link"><a href="/">Companies</a></h3>
+        <h3 class="course_link"><a href="/course/">Courses</a></h3>
+        <h3 class="course_link"><a href="/group/">Groups</a></h3>
+        <h3 class="course_link"><a href="/teacher/">Teachers</a></h3>
+        <a href="/aitemp/recommendation"
+           style="display: block; margin-top: 30px; color: #2c84d2; font-weight: bold; text-decoration: none;">
+            🤖 Ask AI Course Assistant
+        </a>
+    </div>
+</div>
+
+</body>
+</html>

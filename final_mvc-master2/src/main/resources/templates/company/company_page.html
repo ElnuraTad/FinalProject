@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <title>Company</title>
+    <link rel="stylesheet" th:href="@{/company.css}" />
+</head>
+<body>
+
+<div class="container">
+    <div align="center">
+
+        <div class="autoris" sec:authorize="isAuthenticated()">
+            <h1>Welcome to page</h1> <span sec:authentication="name"></span>
+            <i><span sec:authentication="principal.authorities">Role</span></i>
+        </div>
+        <br>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Logout">
+        </form>
+
+        <h1 class="company_title">Company</h1>
+<!--        <img th:src="@{image/ww.png}" alt="flag">-->
+
+        <hr>
+        <h3 class="company_link"><a href="/new">Craete Company</a></h3>
+        <br>
+        <br>
+        <table border="1" cellpadding="10">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th th:href="@{fa-brands fa-bitbucket}">Name</th>
+                <th>Location</th>
+                <th sec:authorize="hasAnyAuthority('ADMIN','EDITOR')">Settings</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="company: ${company}">
+                <td th:text="${company.id}">ID</td>
+                <td th:text="${company.name}">Name</td>
+                <td th:text="${company.locatedCountry}">Location</td>
+                <td sec:authorize="hasAnyAuthority('ADMIN','EDITOR')">
+                    <div class="company_link"><a th:href="@{'/edit/'+${company.id}}">Edit</a></div>
+                    <div class="company_link"><a sec:authorize="hasAnyAuthority('ADMIN')" th:href="@{'/delete/'+${company.id}}">Delete</a></div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <br>
+        <h3 class="company_link"><a href="/course/">Courses</a></h3>
+    </div>
+</div>
+
+
+<script src="https://kit.fontawesome.com/8c9a86bb80.js" crossorigin="anonymous"></script>
+</body>
+</html>
